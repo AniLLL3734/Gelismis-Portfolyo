@@ -1,19 +1,19 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialize Particles.js with a deeper, slower galaxy feel
+    // Advanced Galaxy Particles
     particlesJS('particles-js', {
         particles: {
-            number: { value: 80, density: { enable: true, value_area: 1000 } },
-            color: { value: ['#9d4edd', '#00f5ff', '#ffffff'] },
+            number: { value: 100, density: { enable: true, value_area: 1200 } },
+            color: { value: ['#9d4edd', '#00f5ff', '#ff3366', '#ffffff'] },
             shape: { type: 'circle' },
-            opacity: { value: 0.3, random: true, anim: { enable: true, speed: 0.5, opacity_min: 0.1, sync: false } },
-            size: { value: 2.5, random: true, anim: { enable: true, speed: 1, size_min: 0.1, sync: false } },
-            line_linked: { enable: true, distance: 180, color: '#9d4edd', opacity: 0.15, width: 1 },
-            move: { enable: true, speed: 0.8, direction: 'none', random: true, straight: false, out_mode: 'out', bounce: false }
+            opacity: { value: 0.4, random: true, anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false } },
+            size: { value: 3, random: true, anim: { enable: true, speed: 2, size_min: 0.1, sync: false } },
+            line_linked: { enable: true, distance: 150, color: '#9d4edd', opacity: 0.2, width: 1 },
+            move: { enable: true, speed: 1, direction: 'none', random: true, straight: false, out_mode: 'out', bounce: false }
         },
         interactivity: {
             detect_on: 'canvas',
-            events: { onhover: { enable: true, mode: 'grab' }, onclick: { enable: true, mode: 'push' }, resize: true },
-            modes: { grab: { distance: 200, line_linked: { opacity: 0.4 } }, push: { particles_nb: 3 } }
+            events: { onhover: { enable: true, mode: 'bubble' }, onclick: { enable: true, mode: 'repulse' }, resize: true },
+            modes: { bubble: { distance: 250, size: 6, duration: 2, opacity: 0.8, speed: 3 }, repulse: { distance: 200, duration: 0.4 } }
         },
         retina_detect: true
     });
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let allProjects = [];
     let languages = new Set();
     
-    // Exact names of the pinned repos
+    // Exactly pinned repos
     const pinnedNames = [
         "ImageForge",
         "lazer-rotalayici",
@@ -40,21 +40,30 @@ document.addEventListener('DOMContentLoaded', () => {
         "TTMTAL-Mobil"
     ];
 
-    fetch('repos.json')
+    // Exclude garbage / DB repos
+    const excludeNames = [
+        "AnilVeSarkilari", "GAMEARCHIVE", "gfiles", "Repottmtal", 
+        "Repottmtalchat", "RepoHack", "REPOMORGRAM", "REPOCS", 
+        "Repo", "Repo2", "Repo3", "SpectreClient-Assets"
+    ];
+
+    // Fetch PUBLIC repos only from GitHub API
+    fetch('https://api.github.com/users/AniLLL3734/repos?per_page=100')
         .then(response => response.json())
         .then(data => {
-            allProjects = data;
+            // Filter out forks and excluded names
+            allProjects = data.filter(repo => !repo.fork && !excludeNames.includes(repo.name));
             
             // Sort by updated date or stars
-            allProjects.sort((a, b) => b.stargazerCount - a.stargazerCount || new Date(b.updatedAt) - new Date(a.updatedAt));
+            allProjects.sort((a, b) => b.stargazers_count - a.stargazers_count || new Date(b.updated_at) - new Date(a.updated_at));
 
             let totalStars = 0;
             let langCount = {};
 
             allProjects.forEach(repo => {
-                totalStars += repo.stargazerCount;
-                if (repo.primaryLanguage && repo.primaryLanguage.name) {
-                    let lang = repo.primaryLanguage.name;
+                totalStars += repo.stargazers_count;
+                if (repo.language) {
+                    let lang = repo.language;
                     languages.add(lang);
                     langCount[lang] = (langCount[lang] || 0) + 1;
                 }
@@ -70,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            // Update Stats UI
+            // Update Stats UI with animation
             animateValue(totalReposEl, 0, allProjects.length, 1500);
             animateValue(totalStarsEl, 0, totalStars, 1500);
             topLanguageEl.textContent = topLang;
@@ -104,14 +113,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
-            // Render Pinned Projects
+            // Render Projects
             loader.style.display = 'none';
             renderProjectCards(pinnedProjects, pinnedProjectsGrid);
-
-            // Render Others hidden initially
             renderProjectCards(otherProjects, projectsGrid);
             
-            // Initialize VanillaTilt for the new elements
+            // Initialize Advanced 3D Tilt
             initTilt();
 
             // Handle Show More Button
@@ -121,10 +128,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     projectsGrid.style.display = 'grid';
                     showMoreBtn.innerHTML = '<span>Daha Az Göster</span> <i class="fas fa-chevron-up"></i>';
                     
-                    // Simple animation
                     projectsGrid.style.opacity = 0;
                     setTimeout(() => {
-                        projectsGrid.style.transition = 'opacity 0.5s ease';
+                        projectsGrid.style.transition = 'opacity 0.8s cubic-bezier(0.165, 0.84, 0.44, 1)';
                         projectsGrid.style.opacity = 1;
                         initTilt();
                     }, 50);
@@ -148,7 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderProjectCards(projects, container) {
         container.innerHTML = '';
         projects.forEach(repo => {
-            const langName = repo.primaryLanguage ? repo.primaryLanguage.name : 'Çeşitli';
+            const langName = repo.language || 'Çeşitli';
             const langColor = getLanguageColor(langName);
             
             const card = document.createElement('div');
@@ -158,7 +164,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="project-header">
                     <h3 class="project-title">${repo.name}</h3>
                     <div class="project-links">
-                        <a href="${repo.url}" target="_blank" title="GitHub'da Görüntüle"><i class="fab fa-github"></i></a>
+                        <a href="${repo.html_url}" target="_blank" title="GitHub'da Görüntüle"><i class="fab fa-github"></i></a>
+                        ${repo.homepage ? `<a href="${repo.homepage}" target="_blank" title="Canlı Demo"><i class="fas fa-external-link-alt"></i></a>` : ''}
                     </div>
                 </div>
                 <p class="project-desc">${repo.description || 'Açıklama bulunmuyor.'}</p>
@@ -168,7 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         ${langName}
                     </span>
                     <span class="project-stars">
-                        <i class="fas fa-star"></i> ${repo.stargazerCount}
+                        <i class="fas fa-star"></i> ${repo.stargazers_count}
                     </span>
                 </div>
             `;
@@ -177,7 +184,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function filterProjects(filter) {
-        // Only filtering the "All Projects" grid (projectsGrid)
         const cards = projectsGrid.querySelectorAll('.project-card');
         let visibleCount = 0;
         
@@ -190,7 +196,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Ensure projects grid is visible if filtering
         if (visibleCount > 0 && projectsGrid.style.display === 'none') {
             projectsGrid.style.display = 'grid';
             showMoreBtn.innerHTML = '<span>Daha Az Göster</span> <i class="fas fa-chevron-up"></i>';
@@ -199,17 +204,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function initTilt() {
         VanillaTilt.init(document.querySelectorAll(".project-card"), {
+            max: 8,
+            speed: 400,
+            glare: true,
+            "max-glare": 0.15,
+            scale: 1.03
+        });
+        VanillaTilt.init(document.querySelectorAll(".tilt-card"), {
+            max: 15,
+            speed: 400,
+            glare: true,
+            "max-glare": 0.25,
+            scale: 1.05
+        });
+        VanillaTilt.init(document.querySelectorAll(".contact-box"), {
             max: 5,
             speed: 400,
             glare: true,
-            "max-glare": 0.1,
-            scale: 1.02
-        });
-        VanillaTilt.init(document.querySelectorAll(".tilt-card"), {
-            max: 10,
-            speed: 400,
-            glare: true,
-            "max-glare": 0.2
+            "max-glare": 0.1
         });
     }
 
@@ -240,6 +252,6 @@ document.addEventListener('DOMContentLoaded', () => {
             'PHP': '#4F5D95',
             'Batchfile': '#C1F12E'
         };
-        return colors[lang] || '#a0a0b0';
+        return colors[lang] || '#00f5ff';
     }
 });

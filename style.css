@@ -559,6 +559,103 @@ a {
     margin-top: 60px;
 }
 
+/* Contact Section */
+.contact-section {
+    padding: 100px 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.contact-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.contact-box {
+    background: var(--surface-color);
+    border: 1px solid rgba(157, 78, 221, 0.4);
+    padding: 60px 40px;
+    border-radius: 30px;
+    position: relative;
+    overflow: hidden;
+    max-width: 600px;
+    width: 100%;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    transform-style: preserve-3d;
+}
+
+.contact-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 150%;
+    height: 150%;
+    background: radial-gradient(circle, rgba(157, 78, 221, 0.15) 0%, transparent 60%);
+    transform: translate(-50%, -50%);
+    z-index: 0;
+    pointer-events: none;
+    animation: pulseGlow 4s infinite alternate ease-in-out;
+}
+
+@keyframes pulseGlow {
+    0% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+    100% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
+}
+
+.contact-icon {
+    font-size: 4rem;
+    color: var(--accent);
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+    transform: translateZ(40px);
+    filter: drop-shadow(0 0 15px rgba(0, 245, 255, 0.5));
+}
+
+.contact-box h3 {
+    font-size: 2.5rem;
+    color: #fff;
+    margin-bottom: 15px;
+    position: relative;
+    z-index: 1;
+    transform: translateZ(30px);
+}
+
+.contact-box p {
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    margin-bottom: 35px;
+    position: relative;
+    z-index: 1;
+    transform: translateZ(20px);
+}
+
+.email-btn {
+    background: linear-gradient(90deg, #ff3366, #ff0055);
+    color: #fff;
+    font-size: 1.3rem;
+    padding: 18px 40px;
+    border-radius: 50px;
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    position: relative;
+    z-index: 1;
+    transform: translateZ(40px);
+    border: none;
+    box-shadow: 0 10px 30px rgba(255, 51, 102, 0.4);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.email-btn:hover {
+    transform: translateZ(50px) scale(1.05) translateY(-5px);
+    box-shadow: 0 20px 40px rgba(255, 51, 102, 0.6);
+}
+
 /* Footer */
 footer {
     padding: 60px 20px;
