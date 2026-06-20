@@ -11,13 +11,15 @@
 </head>
 <body>
     <div id="particles-js"></div>
+    <div class="ambient-light"></div>
     
     <nav class="navbar">
         <div class="nav-content">
-            <div class="logo">AniLLL3734<span>.</span></div>
+            <div class="logo">AniLLL3734<span class="dot">.</span></div>
             <div class="nav-links">
                 <a href="#home">Ana Sayfa</a>
-                <a href="#projects">Projeler</a>
+                <a href="#pinned">Öne Çıkanlar</a>
+                <a href="#projects">Tüm Projeler</a>
                 <a href="https://github.com/AniLLL3734" target="_blank" class="github-btn"><i class="fab fa-github"></i> GitHub</a>
             </div>
         </div>
@@ -25,29 +27,31 @@
 
     <header id="home" class="hero">
         <div class="hero-content">
-            <h1 class="glitch" data-text="AniLLL3734">AniLLL3734</h1>
-            <h2 class="subtitle">Yazılım & Oyun Geliştirme Portfolyosu</h2>
-            <p class="description">GitHub üzerindeki tüm projelerimi, uygulamalarımı ve oyunlarımı buradan inceleyebilirsiniz. Modern teknolojiler ve yaratıcı çözümler.</p>
-            <div class="hero-buttons">
-                <a href="#projects" class="btn primary-btn">Projeleri Keşfet</a>
-                <a href="#stats" class="btn secondary-btn">İstatistikler</a>
+            <h1 class="reveal-text">AniLLL3734</h1>
+            <h2 class="subtitle fade-in-up">Yazılım & Oyun Geliştirme</h2>
+            <p class="description fade-in-up delay-1">Karanlığın içinden doğan yenilikçi projeler, güçlü mimariler ve yaratıcı çözümler.</p>
+            <div class="hero-buttons fade-in-up delay-2">
+                <a href="#pinned" class="btn primary-btn"><i class="fas fa-rocket"></i> Keşfet</a>
             </div>
+        </div>
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
         </div>
     </header>
 
     <section id="stats" class="stats-section">
         <div class="stats-container">
-            <div class="stat-box">
+            <div class="stat-box tilt-card">
                 <i class="fas fa-code-branch"></i>
                 <h3 id="total-repos">0</h3>
                 <p>Toplam Proje</p>
             </div>
-            <div class="stat-box">
+            <div class="stat-box tilt-card">
                 <i class="fas fa-star"></i>
                 <h3 id="total-stars">0</h3>
                 <p>Toplam Yıldız</p>
             </div>
-            <div class="stat-box">
+            <div class="stat-box tilt-card">
                 <i class="fas fa-keyboard"></i>
                 <h3 id="top-language">-</h3>
                 <p>En Çok Kullanılan</p>
@@ -55,9 +59,19 @@
         </div>
     </section>
 
-    <section id="projects" class="projects-section">
+    <section id="pinned" class="projects-section">
         <div class="section-header">
-            <h2>Projelerim</h2>
+            <h2><i class="fas fa-thumbtack"></i> Öne Çıkan Projeler</h2>
+            <p class="section-desc">En çok değer verdiğim ve özenle geliştirdiğim çalışmalarım.</p>
+        </div>
+        <div class="projects-grid pinned-grid" id="pinned-projects-grid">
+            <!-- Pinned projects dynamically generated -->
+        </div>
+    </section>
+
+    <section id="projects" class="projects-section all-projects-container">
+        <div class="section-header">
+            <h2>Tüm Projeler</h2>
             <div class="filters" id="filters">
                 <button class="filter-btn active" data-filter="all">Tümü</button>
                 <!-- Filters dynamically generated -->
@@ -66,17 +80,24 @@
         
         <div class="loader" id="loader">
             <div class="spinner"></div>
-            <p>Projeler Yükleniyor...</p>
+            <p>Veriler Yükleniyor...</p>
         </div>
 
-        <div class="projects-grid" id="projects-grid">
+        <div class="projects-grid" id="projects-grid" style="display: none;">
             <!-- Projects dynamically generated -->
+        </div>
+        
+        <div class="show-more-container" id="show-more-container">
+            <button id="show-more-btn" class="btn secondary-btn glow-btn">
+                <span>Daha Fazla Göster</span> <i class="fas fa-chevron-down"></i>
+            </button>
         </div>
     </section>
 
     <footer>
         <div class="footer-content">
-            <p>&copy; 2026 AniLLL3734. GitHub API ve CLI kullanılarak oluşturuldu.</p>
+            <div class="logo">AniLLL3734<span class="dot">.</span></div>
+            <p>&copy; 2026. Karanlığın Tonlarıyla Tasarlandı.</p>
             <div class="social-links">
                 <a href="https://github.com/AniLLL3734" target="_blank"><i class="fab fa-github"></i></a>
             </div>
@@ -84,6 +105,7 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
