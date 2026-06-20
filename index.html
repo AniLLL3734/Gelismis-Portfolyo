@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AniLLL3734 | Gelişmiş Portfolyo</title>
+    <meta name="description" content="AniLLL3734 GitHub projelerinin yer aldığı gelişmiş, interaktif portfolyo.">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="particles-js"></div>
+    
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="logo">AniLLL3734<span>.</span></div>
+            <div class="nav-links">
+                <a href="#home">Ana Sayfa</a>
+                <a href="#projects">Projeler</a>
+                <a href="https://github.com/AniLLL3734" target="_blank" class="github-btn"><i class="fab fa-github"></i> GitHub</a>
+            </div>
+        </div>
+    </nav>
+
+    <header id="home" class="hero">
+        <div class="hero-content">
+            <h1 class="glitch" data-text="Aşırı Gelişmiş">Aşırı Gelişmiş</h1>
+            <h2 class="subtitle">Yazılım & Oyun Geliştirme Portfolyosu</h2>
+            <p class="description">GitHub üzerindeki tüm projelerimi, uygulamalarımı ve oyunlarımı buradan inceleyebilirsiniz. Modern teknolojiler ve yaratıcı çözümler.</p>
+            <div class="hero-buttons">
+                <a href="#projects" class="btn primary-btn">Projeleri Keşfet</a>
+                <a href="#stats" class="btn secondary-btn">İstatistikler</a>
+            </div>
+        </div>
+    </header>
+
+    <section id="stats" class="stats-section">
+        <div class="stats-container">
+            <div class="stat-box">
+                <i class="fas fa-code-branch"></i>
+                <h3 id="total-repos">0</h3>
+                <p>Toplam Proje</p>
+            </div>
+            <div class="stat-box">
+                <i class="fas fa-star"></i>
+                <h3 id="total-stars">0</h3>
+                <p>Toplam Yıldız</p>
+            </div>
+            <div class="stat-box">
+                <i class="fas fa-keyboard"></i>
+                <h3 id="top-language">-</h3>
+                <p>En Çok Kullanılan</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="projects-section">
+        <div class="section-header">
+            <h2>Projelerim</h2>
+            <div class="filters" id="filters">
+                <button class="filter-btn active" data-filter="all">Tümü</button>
+                <!-- Filters dynamically generated -->
+            </div>
+        </div>
+        
+        <div class="loader" id="loader">
+            <div class="spinner"></div>
+            <p>Projeler Yükleniyor...</p>
+        </div>
+
+        <div class="projects-grid" id="projects-grid">
+            <!-- Projects dynamically generated -->
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2026 AniLLL3734. GitHub API ve CLI kullanılarak oluşturuldu.</p>
+            <div class="social-links">
+                <a href="https://github.com/AniLLL3734" target="_blank"><i class="fab fa-github"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
